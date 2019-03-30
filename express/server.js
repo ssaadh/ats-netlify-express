@@ -4,9 +4,11 @@ const serverless = require('serverless-http');
 const app = express();
 const bodyParser = require('body-parser');
 
+const Cors = require( 'cors' );
 const Axios = require( 'axios' );
 
 const router = express.Router();
+
 router.get('/', (req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.write('<h1>Hello from Express.js!</h1>');
@@ -16,13 +18,33 @@ router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
 router.post( '/auth-code', ( req, res ) => {
-    .catch( error => console.log( error ) );
   Axios.post( req.body.url )
     .then( response => {
       res.json( { status: response.status, ...response.data } ) 
     } )
+    .catch( ( error ) => {
+        if ( error.response ) {
+            // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.json( { 
+              if: 'response', 
+              status: error.response.status, 
+              msg: error.message, 
+              headers: error.response.headers, 
+              data: error.response.data 
+            } );
+        } else if (error.request) {
+            // The request was made but no response was received
+            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+            res.json( { if: 'request', req: error.request } );
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            res.json( { if: 'else', msg: error.message } );
+        }
+        console.log( error.config );
+      } );
 } );
 
+app.use( Cors() );
 app.use(bodyParser.json());
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 
