@@ -1,7 +1,18 @@
-# Express.js on Netlify Example
+## ReadMe
 
 [![Deploy to
-Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/neverendingqs/netlify-express)
+Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/noicouldalwaysturn2u/netlify-express)
+
+This fork includes one additional endpoint for working with an OAuth 2 Redux auth implementation focused for the front-end with implicit granting. It also allows for authorization code granting which means a backend endpoint is needed for POSTING with the temporary code recieved to get the access token. That endpoint is:
+https://atsexpress.atextbooksituation.com/.netlify/functions/server/auth-code
+
+The library/npm package this was made for is:
+https://github.com/noicouldalwaysturn2u/oauth2-redux-implicit-authcode
+
+
+## Previous ReadMe:
+
+### Express.js on Netlify Example
 
 An example of how to host an Express.js app on Netlify using
 [serverless-http](https://github.com/dougmoscrop/serverless-http). See
