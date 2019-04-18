@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
+// For working with authorization code OAuth 2 with frontend JS
 router.post( '/auth-code', ( req, res ) => {
   Axios.post( req.body.url )
     .then( response => {
