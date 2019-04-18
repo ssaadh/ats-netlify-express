@@ -1,7 +1,7 @@
 {
-  "name": "netlify-express",
-  "version": "0.0.1",
-  "description": "Example of how to deploy a Express.js Netlify app.",
+  "name": "ats-netlify-express",
+  "version": "1.0.0",
+  "description": "Based on neverendingqs' sample [serverless] Express.js Netlify app. Adds a few specific endpoints.",
   "main": "functions/server.js",
   "scripts": {
     "build": "netlify-lambda build express",
@@ -9,18 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neverendingqs/netlify-express.git"
+    "url": "git+https://github.com/inoicouldalwaysturn2u/ats-netlify-express.git"
   },
   "keywords": [
     "netlify",
     "express.js"
   ],
   "author": "neverendingqs",
+  "contributor": "inoicouldalwaysturn2u",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/neverendingqs/netlify-express/issues"
+    "url": "https://github.com/inoicouldalwaysturn2u/ats-netlify-express/issues"
   },
-  "homepage": "https://github.com/neverendingqs/netlify-express#readme",
+  "homepage": "https://github.com/inoicouldalwaysturn2u/ats-netlify-express#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "cors": "^2.8.5"

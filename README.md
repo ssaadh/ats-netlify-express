@@ -13,6 +13,16 @@ Example url:
 POST https://atsexpress.atextbooksituation.com/.netlify/functions/server/auth-code
 ```
 
+Two other endpoints are for working with Status Hero's API. The endpoints are GET and POST to `/statushero/v1`.
+
+@TODO
+Example urls:
+
+```sh
+GET https://atsexpress.atextbooksituation.com/.netlify/functions/server/statushero/v1/
+POST https://atsexpress.atextbooksituation.com/.netlify/functions/server/statushero/v1/
+```
+
 The default url examples:
 
 ```sh
