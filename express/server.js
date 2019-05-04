@@ -50,8 +50,9 @@ const statushero_initial = ( req ) => {
 
   const wildcard_path = req.params[ 0 ];  
 
-  let query = '?'
+  let query = '';
   if ( Object.keys( req.query ).length !== 0 ) {
+    query = '?';
     Object.entries( req.query ).forEach( ( [ key, val ] ) => {
       query += `${ key }=${ val }`;
     } );
