@@ -45,20 +45,26 @@ router.post( '/auth-code', ( req, res ) => {
       } );
 } );
 
-const statushero_initial = ( req ) => {
-  const base_api_url = 'https://service.statushero.com/api/v1/';
-
-  const wildcard_path = req.params[ 0 ];  
-
+// Helper
+const assembleUrl = ( baseUrl, wildcardPath, queries ) => {
+  // Don't need to include anything like ? if there's no query
   let query = '';
-  if ( Object.keys( req.query ).length !== 0 ) {
+  if ( Object.keys( queries ).length !== 0 ) {
     query = '?';
-    Object.entries( req.query ).forEach( ( [ key, val ] ) => {
-      query += `${ key }=${ val }`;
+    Object.entries( queries ).forEach( ( [ key, val ] ) => {
+      query += `${ key }=${ val }&`;
     } );
   };
+  // Slice off & if it's the last character
+  const fullQuery = query.charAt( query.length - 1 ) == '&' ? query.slice( 0, -1 ) : query;
+  
+  return `${ baseApiUrl }${ wildcardPath }${ fullQuery }`;
+}
 
-  const fullUrl = `${ base_api_url }${ wildcard_path }${ query }`;
+// Status Hero helper
+const statushero_initial = ( req ) => {
+  const baseApiUrl = 'https://service.statushero.com/api/v1/';
+  const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
 
   const headers = {};
   headers[ 'X-TEAM-ID' ] = req.headers[ 'x-team-id' ];
@@ -136,20 +142,10 @@ router.post( '/statushero/v1/*', ( req, res ) => {
       } );
 } );
 
+// Complice helper
 const complice_initial = ( req ) => {
   const base_api_url = 'https://complice.co/api/v0/u/me/';
-
-  const wildcard_path = req.params[ 0 ];  
-
-  let query = '';
-  if ( Object.keys( req.query ).length !== 0 ) {
-    query = '?'
-    Object.entries( req.query ).forEach( ( [ key, val ] ) => {
-      query += `${ key }=${ val }`;
-    } );
-  };
-
-  const fullUrl = `${ base_api_url }${ wildcard_path }${ query }`;
+  const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
 
   const headers = { 'Authorization': req.headers[ 'authorization' ] };
 
