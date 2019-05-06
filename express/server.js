@@ -58,11 +58,11 @@ const assembleUrl = ( baseUrl, wildcardPath, queries ) => {
   // Slice off & if it's the last character
   const fullQuery = query.charAt( query.length - 1 ) == '&' ? query.slice( 0, -1 ) : query;
   
-  return `${ baseApiUrl }${ wildcardPath }${ fullQuery }`;
+  return `${ baseUrl }${ wildcardPath }${ fullQuery }`;
 }
 
 // Status Hero helper
-const statushero_initial = ( req ) => {
+const statusheroInitial = ( req ) => {
   const baseApiUrl = 'https://service.statushero.com/api/v1/';
   const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
 
@@ -79,7 +79,7 @@ const statushero_initial = ( req ) => {
 
 // Pass through for Status Hero API GET requests
 router.get( '/statushero/v1/*', ( req, res ) => {
-  const { fullUrl, headers } = statushero_initial( req );
+  const { fullUrl, headers } = statusheroInitial( req );
 
   Axios.get(
     fullUrl, 
@@ -111,7 +111,7 @@ router.get( '/statushero/v1/*', ( req, res ) => {
 
 // Pass through for Status Hero API POST requests
 router.post( '/statushero/v1/*', ( req, res ) => {
-  const { fullUrl, headers } = statushero_initial( req );
+  const { fullUrl, headers } = statusheroInitial( req );
   
   Axios.post( 
     fullUrl, 
@@ -143,8 +143,8 @@ router.post( '/statushero/v1/*', ( req, res ) => {
 } );
 
 // Complice helper
-const complice_initial = ( req ) => {
-  const base_api_url = 'https://complice.co/api/v0/u/me/';
+const compliceInitial = ( req ) => {
+  const baseApiUrl = 'https://complice.co/api/v0/u/me/';
   const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
 
   const headers = { 'Authorization': req.headers[ 'authorization' ] };
@@ -154,7 +154,7 @@ const complice_initial = ( req ) => {
 
 // Pass through for Status Hero API GET requests
 router.get( '/complice/v0/*', ( req, res ) => {
-  const { fullUrl, headers } = complice_initial( req );
+  const { fullUrl, headers } = compliceInitial( req );
 
   Axios.get(
     fullUrl, 
@@ -186,7 +186,7 @@ router.get( '/complice/v0/*', ( req, res ) => {
 
 // Pass through for Status Hero API POST requests
 router.post( '/complice/v0/*', ( req, res ) => {
-  const { fullUrl, headers } = complice_initial( req );
+  const { fullUrl, headers } = compliceInitial( req );
   
   Axios.post( 
     fullUrl, 
