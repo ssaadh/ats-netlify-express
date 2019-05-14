@@ -152,7 +152,7 @@ const compliceInitial = ( req ) => {
   return { fullUrl, headers };
 }
 
-// Pass through for Status Hero API GET requests
+// Pass through for Complice API GET requests
 router.get( '/complice/v0/*', ( req, res ) => {
   const { fullUrl, headers } = compliceInitial( req );
 
@@ -184,7 +184,7 @@ router.get( '/complice/v0/*', ( req, res ) => {
       } );
 } );
 
-// Pass through for Status Hero API POST requests
+// Pass through for Complice API POST requests
 router.post( '/complice/v0/*', ( req, res ) => {
   const { fullUrl, headers } = compliceInitial( req );
   
@@ -207,6 +207,43 @@ router.post( '/complice/v0/*', ( req, res ) => {
             } );
         } else if (error.request) {
             // The request was made but no slresponse was received
+            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+            res.json( { if: 'request', req: error.request } );
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            res.json( { if: 'else', msg: error.message } );
+        }
+        console.log( error.config );
+      } );
+} );
+
+// RescueTime helper
+const rescuetimeInitial = ( req ) => {
+  const baseApiUrl = 'https://www.rescuetime.com/anapi/';
+  return assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
+}
+
+// Pass through for ResuceTime API GET requests
+router.get( '/rescuetime/*', ( req, res ) => {
+  const fullUrl = rescuetimeInitial( req );
+
+  Axios.get(
+    fullUrl 
+  ).then( response => {
+      res.json( { status: response.status, ...response.data } ) 
+    } )
+    .catch( ( error ) => {
+        if ( error.response ) {
+            // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.json( { 
+              if: 'response', 
+              status: error.response.status, 
+              msg: error.message, 
+              headers: error.response.headers, 
+              data: error.response.data 
+            } );
+        } else if ( error.request ) {
+            // The request was made but no response was received
             // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
             res.json( { if: 'request', req: error.request } );
         } else {
