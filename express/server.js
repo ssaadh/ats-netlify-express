@@ -21,17 +21,18 @@ router.post('/', (req, res) => res.json({ postBody: req.body }));
 router.post( '/auth-code', ( req, res ) => {
   Axios.post( req.body.url )
     .then( response => {
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
         if ( error.response ) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.sendStatus( error.response.status );
+            res.headers( { ...error.response.headers } );
             res.json( { 
               if: 'response', 
-              status: error.response.status, 
               msg: error.message, 
-              headers: error.response.headers, 
-              data: error.response.data 
+              ...error.response.data
             } );
         } else if ( error.request ) {
             // The request was made but no response was received
@@ -39,7 +40,7 @@ router.post( '/auth-code', ( req, res ) => {
             res.json( { if: 'request', req: error.request } );
         } else {
             // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message } );
+            res.json( { if: 'else', msg: error.message, message: error.message } );
         }
         console.log( error.config );
       } );
@@ -85,17 +86,18 @@ router.get( '/statushero/v1/*', ( req, res ) => {
     fullUrl, 
     { headers }, 
   ).then( response => {
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
         if ( error.response ) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.sendStatus( error.response.status );
+            res.headers( { ...error.response.headers } );
             res.json( { 
               if: 'response', 
-              status: error.response.status, 
               msg: error.message, 
-              headers: error.response.headers, 
-              data: error.response.data 
+              ...error.response.data
             } );
         } else if ( error.request ) {
             // The request was made but no response was received
@@ -103,7 +105,7 @@ router.get( '/statushero/v1/*', ( req, res ) => {
             res.json( { if: 'request', req: error.request } );
         } else {
             // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message } );
+            res.json( { if: 'else', msg: error.message, message: error.message } );
         }
         console.log( error.config );
       } );
@@ -118,17 +120,18 @@ router.post( '/statushero/v1/*', ( req, res ) => {
     req.body, 
     { headers }, 
     ).then( response => {
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
         if ( error.response ) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.sendStatus( error.response.status );
+            res.headers( { ...error.response.headers } );
             res.json( { 
               if: 'response', 
-              status: error.response.status, 
               msg: error.message, 
-              headers: error.response.headers, 
-              data: error.response.data 
+              ...error.response.data
             } );
         } else if (error.request) {
             // The request was made but no slresponse was received
@@ -136,7 +139,7 @@ router.post( '/statushero/v1/*', ( req, res ) => {
             res.json( { if: 'request', req: error.request } );
         } else {
             // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message } );
+            res.json( { if: 'else', msg: error.message, message: error.message } );
         }
         console.log( error.config );
       } );
@@ -160,17 +163,18 @@ router.get( '/complice/v0/*', ( req, res ) => {
     fullUrl, 
     { headers }, 
   ).then( response => {
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
         if ( error.response ) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.sendStatus( error.response.status );
+            res.headers( { ...error.response.headers } );
             res.json( { 
               if: 'response', 
-              status: error.response.status, 
               msg: error.message, 
-              headers: error.response.headers, 
-              data: error.response.data 
+              ...error.response.data
             } );
         } else if ( error.request ) {
             // The request was made but no response was received
@@ -178,7 +182,7 @@ router.get( '/complice/v0/*', ( req, res ) => {
             res.json( { if: 'request', req: error.request } );
         } else {
             // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message } );
+            res.json( { if: 'else', msg: error.message, message: error.message } );
         }
         console.log( error.config );
       } );
@@ -193,25 +197,26 @@ router.post( '/complice/v0/*', ( req, res ) => {
     req.body, 
     { headers }, 
     ).then( response => {
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
         if ( error.response ) {
             // The request was made and the server responded with a status code that falls out of the range of 2xx
+            res.sendStatus( error.response.status );
+            res.headers( { ...error.response.headers } );
             res.json( { 
               if: 'response', 
-              status: error.response.status, 
               msg: error.message, 
-              headers: error.response.headers, 
-              data: error.response.data 
+              ...error.response.data
             } );
-        } else if (error.request) {
+        } else if ( error.request ) {
             // The request was made but no slresponse was received
             // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
             res.json( { if: 'request', req: error.request } );
         } else {
             // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message } );
+            res.json( { if: 'else', msg: error.message, message: error.message } );
         }
         console.log( error.config );
       } );
@@ -230,7 +235,7 @@ router.get( '/rescuetime/*', ( req, res ) => {
   Axios.get(
     fullUrl 
   ).then( response => {
-      res.headers( { ...response.headers } );
+      // res.headers( { ...response.headers } );
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
@@ -241,7 +246,7 @@ router.get( '/rescuetime/*', ( req, res ) => {
             res.json( { 
               if: 'response', 
               msg: error.message, 
-              ...error.response.data
+              ...error.response.data 
             } );
         } else if ( error.request ) {
             // The request was made but no response was received
