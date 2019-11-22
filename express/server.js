@@ -1,16 +1,16 @@
 'use strict';
-const express = require('express');
-const serverless = require('serverless-http');
+const express = require( 'express' );
+const serverless = require( 'serverless-http' );
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require( 'body-parser' );
 
 const Cors = require( 'cors' );
 const Axios = require( 'axios' );
 
 const router = express.Router();
 
-router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
-router.post('/', (req, res) => res.json({ postBody: req.body }));
+router.get( '/another', ( req, res ) => res.json( { route: req.originalUrl } ) );
+router.post( '/', ( req, res ) => res.json( { postBody: req.body } ) );
 
 // For working with authorization code OAuth 2 with frontend JS
 router.post( '/auth-code', ( req, res ) => {
@@ -258,7 +258,7 @@ router.get( '/rescuetime/*', ( req, res ) => {
 // Pass through any url to get around CORS
 router.get( '/*', ( req, res ) => {
   if ( req.url === '/' ) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.writeHead( 200, { 'Content-Type': 'text/html' } );
     res.write('<h1>Hello from Yo Yo Schmoozy in the house!</h1>');
     res.end();
   } else {
@@ -288,12 +288,12 @@ router.get( '/*', ( req, res ) => {
       }
       console.log( error.config );
     } );
-    }
+  }
 } );
 
 app.use( Cors() );
-app.use(bodyParser.json());
-app.use('/.netlify/functions/server', router);  // path must route to lambda
+app.use( bodyParser.json() );
+app.use( '/.netlify/functions/server', router );  // path must route to lambda
 
 module.exports = app;
-module.exports.handler = serverless(app);
+module.exports.handler = serverless( app );
