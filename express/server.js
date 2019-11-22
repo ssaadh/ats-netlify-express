@@ -25,25 +25,25 @@ router.post( '/auth-code', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data
-            } );
-        } else if ( error.request ) {
-            // The request was made but no response was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 // Helper
@@ -90,25 +90,25 @@ router.get( '/statushero/v1/*', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data
-            } );
-        } else if ( error.request ) {
-            // The request was made but no response was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 // Pass through for Status Hero API POST requests
@@ -124,25 +124,25 @@ router.post( '/statushero/v1/*', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data
-            } );
-        } else if (error.request) {
-            // The request was made but no slresponse was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if (error.request) {
+          // The request was made but no slresponse was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 // Complice helper
@@ -167,25 +167,25 @@ router.get( '/complice/v0/*', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data
-            } );
-        } else if ( error.request ) {
-            // The request was made but no response was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 // Pass through for Complice API POST requests
@@ -201,25 +201,25 @@ router.post( '/complice/v0/*', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data
-            } );
-        } else if ( error.request ) {
-            // The request was made but no slresponse was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if ( error.request ) {
+          // The request was made but no slresponse was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 // RescueTime helper
@@ -239,25 +239,25 @@ router.get( '/rescuetime/*', ( req, res ) => {
       res.json( { status: response.status, ...response.data } ) 
     } )
     .catch( ( error ) => {
-        if ( error.response ) {
-            // The request was made and the server responded with a status code that falls out of the range of 2xx
-            res.sendStatus( error.response.status );
-            res.headers( { ...error.response.headers } );
-            res.json( { 
-              if: 'response', 
-              msg: error.message, 
-              ...error.response.data 
-            } );
-        } else if ( error.request ) {
-            // The request was made but no response was received
-            // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-            res.json( { if: 'request', req: error.request } );
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            res.json( { if: 'else', msg: error.message, message: error.message } );
-        }
-        console.log( error.config );
-      } );
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data 
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
 } );
 
 app.use( Cors() );
