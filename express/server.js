@@ -10,6 +10,12 @@ const Axios = require( 'axios' );
 
 const router = express.Router();
 
+router.get( '/', ( req, res ) => { 
+  res.writeHead( 200, { 'Content-Type': 'text/html' } );
+  res.write('<h1>Hello from Schmoomu in tha house!</h1>');
+  res.end();
+} );
+
 router.get( '/another', ( req, res ) => res.json( { route: req.originalUrl } ) );
 router.post( '/', ( req, res ) => res.json( { postBody: req.body } ) );
 
@@ -257,17 +263,17 @@ router.get( '/rescuetime/*', ( req, res ) => {
 } );
 
 // Pass through any url to get around CORS
-router.get( '/*', ( req, res ) => {
-  if ( req.url === '/' ) {
+router.get( '/c/*', ( req, res ) => {
+  if ( req.url === '/c' || req.url === '/c/' ) {
     res.writeHead( 200, { 'Content-Type': 'text/html' } );
-    res.write('<h1>Hello from Yo Yo Schmoozy in the house!</h1>');
+    res.write('<h1>Hello from Schmoomu in tha hizz!</h1>');
     res.end();
   } else {
   Axios.get(
-    req.url.substring( 1 ) 
+    req.url.substring( 3 ) 
   ).then( response => {
       // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
+      res.json( { status: response.status, headers: response.headers, data: response.data.length } ) 
     } )
     .catch( ( error ) => {
       if ( error.response ) {
