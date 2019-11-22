@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/inoicouldalwaysturn2u/ats-netlify-express#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "cors": "^2.8.5"
   },
   "devDependencies": {
