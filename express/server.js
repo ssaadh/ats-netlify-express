@@ -9,11 +9,6 @@ const Axios = require( 'axios' );
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.write('<h1>Hello from Express.js!</h1>');
-  res.end();
-});
 router.get('/another', (req, res) => res.json({ route: req.originalUrl }));
 router.post('/', (req, res) => res.json({ postBody: req.body }));
 
@@ -258,6 +253,42 @@ router.get( '/rescuetime/*', ( req, res ) => {
       }
       console.log( error.config );
     } );
+} );
+
+// Pass through any url to get around CORS
+router.get( '/*', ( req, res ) => {
+  if ( req.url === '/' ) {
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.write('<h1>Hello from Yo Yo Schmoozy in the house!</h1>');
+    res.end();
+  } else {
+  Axios.get(
+    req.url.substring( 1 ) 
+  ).then( response => {
+      // res.headers( { ...response.headers } );
+      res.json( { status: response.status, ...response.data } ) 
+    } )
+    .catch( ( error ) => {
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data 
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.log( error.config );
+    } );
+    }
 } );
 
 app.use( Cors() );
